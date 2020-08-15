@@ -8,5 +8,9 @@ class RoomManager {
         fun getRoom(id: Int): Room?{
             return rooms.get(id)
         }
+
+        fun getNextOpen(): Int{
+            return rooms.keys.size + 1
+        }
     }
 }

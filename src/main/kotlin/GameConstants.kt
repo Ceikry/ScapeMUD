@@ -8,6 +8,7 @@ class GameConstants {
         val gui = MainWindow()
         val login = Login()
         var loadedPlayer: Player? = null
+        var BUILD_MODE = true
 
         @JvmStatic
         fun addLine(line: String){

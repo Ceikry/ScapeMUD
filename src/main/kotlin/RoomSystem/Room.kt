@@ -12,6 +12,7 @@ class Room {
     val exits = ExitList()
     val items= ArrayList<Item>()
     var cachedItem: Item? = null
+    var id: Int = RoomManager.getNextOpen()
 
     fun onEntry(){
         drawCardinals()
