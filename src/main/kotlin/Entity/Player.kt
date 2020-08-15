@@ -10,6 +10,8 @@ class Player {
     val equipment = Array<Item>(8){Item(-1,0)}
     val stats = Array<Int>(9){0}
     var cachedItem: Item? = null
+    var locked = false
+    var skills: Skills = Skills()
 
     fun init() {
         if(currentRoom == null && RoomManager.rooms.isNotEmpty()){

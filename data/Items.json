@@ -21,5 +21,17 @@
     "equipMsg": "You brandish the bronze sword.",
     "MeleeATKBonus": "1",
     "MeleeDMGBonus": "1"
+  },
+  {
+    "id": "2",
+    "name": "an axe",
+    "description": "used for chopping things, usually trees.",
+    "value": "25"
+  },
+  {
+    "id": "3",
+    "description": "A log that has several uses.",
+    "name": "A wooden log.",
+    "value": "10"
   }
 ]

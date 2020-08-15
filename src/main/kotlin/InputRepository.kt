@@ -10,7 +10,8 @@ enum class InputRepository(var command: String, action: Action) {
     EQUIP("equip",EquipAction()),
     GEAR("gear",GearAction()),
     STATS("stats",StatsAction()),
-    HELP("help",HelpAction());
+    HELP("help",HelpAction()),
+    CHOP("chop",ChopAction());
 
     var action: Action? = action
 

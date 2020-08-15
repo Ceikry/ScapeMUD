@@ -25,9 +25,11 @@ class DefinitionParser {
             val harvestable = obj["harvestable"]
             val harvestAmt = obj["harvestAmt"]
             val harvestID = obj["harvestID"]
+            val emptyName = obj["emptyName"]
 
             val newObj = ObjectDefinition()
             newObj.name = name
+            newObj.emptyName = (emptyName ?: name).toString()
             newObj.desc = desc
             newObj.emptyDesc = (emptyDesc ?: "").toString()
             newObj.harvestable = (harvestable ?: false) as Boolean

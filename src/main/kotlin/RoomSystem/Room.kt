@@ -39,7 +39,7 @@ class Room {
     fun printObjects(){
         if(objects.isNotEmpty()){
             for(obj in objects){
-                GameConstants.addLine("You see a ${obj.definition?.name} here.")
+                GameConstants.addLine("You see a ${if(obj.harvested) obj.definition?.emptyName else obj.definition?.name} here.")
             }
         }
     }
@@ -85,6 +85,12 @@ class Room {
 
     fun hasObject(name: String): Boolean {
         for(obj in objects){
+            if(obj.harvested){
+                if(obj.definition?.emptyName?.toLowerCase()?.contains(name) == true){
+                    cachedObject = obj
+                    return true
+                }
+            }
             if(obj.definition?.name?.toLowerCase()?.contains(name) == true){
                 cachedObject = obj
                 return true

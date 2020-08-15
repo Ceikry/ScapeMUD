@@ -4,12 +4,13 @@ import RoomSystem.RoomManager
 import Entity.Player
 import gui.MainWindow
 import java.util.*
+import kotlin.math.pow
 
 fun main() {
     DefinitionParser().parseItems()
     DefinitionParser().parseObjects()
     RoomManager.init("data/rooms.json")
-   gameloop()
+    gameloop()
 }
 
 fun gameloop(){
