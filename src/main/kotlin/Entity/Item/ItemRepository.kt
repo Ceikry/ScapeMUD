@@ -1,8 +1,8 @@
-package Entity
+package Entity.Item
 
 class ItemRepository {
     companion object{
-        val items = hashMapOf<Int,ItemDefinition>()
+        val items = hashMapOf<Int, ItemDefinition>()
 
         @JvmStatic
         fun add(id: Int, def: ItemDefinition){

@@ -1,7 +1,25 @@
 [
   {
+    "id": "-1",
+    "description": "null",
+    "name": "null",
+    "value": "0"
+  },
+  {
+    "id": "0",
+    "description": "shiny coin",
+    "name": "coin",
+    "value": "1"
+  },
+  {
     "id": "1",
-    "description": "a yummy candy.",
-    "name": "a candy"
+    "description": "a weak but cheap sword.",
+    "name": "a bronze sword",
+    "value": "100",
+    "wieldable": true,
+    "wieldSlot": "0",
+    "equipMsg": "You brandish the bronze sword.",
+    "MeleeATKBonus": "1",
+    "MeleeDMGBonus": "1"
   }
 ]

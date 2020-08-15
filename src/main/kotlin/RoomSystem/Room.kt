@@ -1,6 +1,6 @@
 package RoomSystem
 
-import Entity.Item
+import Entity.Item.Item
 
 /**
  * Represents a room.
@@ -77,7 +77,7 @@ class Room {
         return false
     }
 
-    fun getItem(name: String): Item{
+    fun getItem(name: String): Item {
         if(cachedItem != null)
             if(cachedItem!!.definition?.name?.contains(name) == true){
                 return cachedItem!!
@@ -87,6 +87,6 @@ class Room {
                 return item
             }
         }
-        return Item(-1,-1)
+        return Item(-1, -1)
     }
 }

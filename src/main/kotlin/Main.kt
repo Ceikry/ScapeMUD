@@ -1,4 +1,4 @@
-import Entity.Item
+import Entity.Item.Item
 import RoomSystem.Room
 import RoomSystem.RoomManager
 import Entity.Player
@@ -18,7 +18,7 @@ fun gameloop(){
     val testRoom = Room()
     testRoom.entryText = "Welcome to the testing room!"
     testRoom.title = "Test Room"
-    testRoom.items.add(Item(1,1))
+    testRoom.items.add(Item(1, 1))
     RoomManager.rooms.put(1,testRoom)
     player.enterRoom(1)
     while(true){
