@@ -16,15 +16,18 @@ class Room {
 
     fun onEntry(){
         drawCardinals()
-        GameConstants.textQueue += System.lineSeparator() + title
+        GameConstants.textQueue += System.lineSeparator() + ">> " + title + "<<"
         GameConstants.textQueue += System.lineSeparator() + entryText
-        printItems()
+        if(items.isNotEmpty()) {
+            GameConstants.textQueue += System.lineSeparator() + "--------"
+            printItems()
+        }
     }
 
     fun printItems(){
         if(items.isNotEmpty()){
             for(item in items){
-                GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.definition?.name}"
+                GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.getName()}" + if(item.amount > 1) "(${item.amount})" else ""
             }
         }
     }

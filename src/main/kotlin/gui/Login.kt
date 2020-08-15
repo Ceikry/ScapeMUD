@@ -85,6 +85,7 @@ class Login : JFrame() {
 
         if(creating){
             GameConstants.loadedPlayer = Player()
+            GameConstants.loadedPlayer!!.init()
             GameConstants.gui.open(GameConstants.loadedPlayer!!)
             this.isVisible = false
             return

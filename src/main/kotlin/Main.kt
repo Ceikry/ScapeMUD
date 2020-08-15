@@ -7,6 +7,7 @@ import java.util.*
 
 fun main() {
     DefinitionParser().parseItems()
+    RoomManager.init("data/rooms.json")
    gameloop()
 }
 

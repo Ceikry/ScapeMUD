@@ -9,6 +9,8 @@ class GameConstants {
         val login = Login()
         var loadedPlayer: Player? = null
         var BUILD_MODE = true
+        val validDirs = arrayOf("n","e","s","w","ne","nw","se","sw","up","down")
+
 
         @JvmStatic
         fun addLine(line: String){

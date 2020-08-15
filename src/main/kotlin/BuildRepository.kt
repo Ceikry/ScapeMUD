@@ -1,8 +1,12 @@
 import actions.Action
-import buildActions.AddAction
+import buildActions.*
 
 enum class BuildRepository(var command: String, action: Action) {
-    ADD("add",AddAction());
+    ADD("add",AddAction()),
+    ST("st",SetTitleAction()),
+    SD("sd",SetDescAction()),
+    SAVE("save",SaveAction()),
+    ADDITEM("additem",AddItemAction());
 
     var action: Action? = action
 

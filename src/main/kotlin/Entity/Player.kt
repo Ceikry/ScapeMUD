@@ -11,6 +11,12 @@ class Player {
     val stats = Array<Int>(9){0}
     var cachedItem: Item? = null
 
+    fun init() {
+        if(currentRoom == null && RoomManager.rooms.isNotEmpty()){
+            enterRoom(1)
+        }
+    }
+
     fun enterRoom(roomId: Int){
         currentRoom = RoomManager.getRoom(roomId)
         currentRoom?.onEntry()
