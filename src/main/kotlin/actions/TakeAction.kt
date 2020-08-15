@@ -12,7 +12,7 @@ class TakeAction : Action() {
             val item = player.currentRoom!!.getItem(tokens[1])
             GameConstants.textQueue += System.lineSeparator() + "You take ${item.definition?.name} and place it in your bag."
             player.currentRoom!!.items.remove(item)
-            player.inventory.add(item)
+            player.addItem(item)
             return
         }
         GameConstants.textQueue += System.lineSeparator() + "You see no such item."

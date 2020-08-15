@@ -1,6 +1,7 @@
 package RoomSystem
 
 import Entity.Item.Item
+import Entity.Object.Object
 
 /**
  * Represents a room.
@@ -11,16 +12,19 @@ class Room {
     var title: String = ""
     val exits = ExitList()
     val items= ArrayList<Item>()
+    val objects = ArrayList<Object>()
     var cachedItem: Item? = null
+    var cachedObject: Object? = null
     var id: Int = RoomManager.getNextOpen()
 
     fun onEntry(){
         drawCardinals()
         GameConstants.textQueue += System.lineSeparator() + ">> " + title + "<<"
         GameConstants.textQueue += System.lineSeparator() + entryText
-        if(items.isNotEmpty()) {
+        if(items.isNotEmpty() || objects.isNotEmpty()) {
             GameConstants.textQueue += System.lineSeparator() + "--------"
             printItems()
+            printObjects()
         }
     }
 
@@ -28,6 +32,14 @@ class Room {
         if(items.isNotEmpty()){
             for(item in items){
                 GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.getName()}" + if(item.amount > 1) "(${item.amount})" else ""
+            }
+        }
+    }
+
+    fun printObjects(){
+        if(objects.isNotEmpty()){
+            for(obj in objects){
+                GameConstants.addLine("You see a ${obj.definition?.name} here.")
             }
         }
     }
@@ -69,6 +81,29 @@ class Room {
 
     fun look(){
         onEntry()
+    }
+
+    fun hasObject(name: String): Boolean {
+        for(obj in objects){
+            if(obj.definition?.name?.toLowerCase()?.contains(name) == true){
+                cachedObject = obj
+                return true
+            }
+        }
+        return false
+    }
+
+    fun getObject(name: String): Object {
+        if(cachedObject != null)
+            if(cachedObject!!.definition?.name?.toLowerCase()?.contains(name) == true){
+                return cachedObject!!
+            }
+        for(obj in objects){
+            if(obj.definition?.name?.toLowerCase()?.contains(name) == true){
+                return obj
+            }
+        }
+        return Object(-1)
     }
 
     fun hasItem(name: String): Boolean{

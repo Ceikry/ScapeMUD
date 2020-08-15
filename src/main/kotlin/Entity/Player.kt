@@ -96,6 +96,7 @@ class Player {
         for(item in inventory){
             GameConstants.textQueue += System.lineSeparator() + "${item.definition?.name} " + if(item.amount > 1) "(${item.amount})" else ""
         }
+        GameConstants.addLine("You have ${inventory.size} items in your inventory, with space for ${28 - inventory.size} more.")
     }
 
     fun hasItem(item: String): Boolean{
@@ -106,5 +107,14 @@ class Player {
             }
         }
         return false
+    }
+
+    fun addItem(item: Item): Boolean {
+        if(inventory.size >= 28){
+            GameConstants.addLine("You do not have space for that.")
+            return false
+        }
+        inventory.add(item)
+        return true
     }
 }

@@ -1,6 +1,7 @@
 package actions
 
 import Entity.Item.Item
+import Entity.Object.Object
 import Entity.Player
 
 class ExamineAction : Action() {
@@ -21,7 +22,15 @@ class ExamineAction : Action() {
             return
         }
 
+        if(player.currentRoom?.hasObject(tokens[1]) == true){
+            val obj = player.currentRoom!!.cachedObject
+            examine(obj)
+            return
+        }
+    }
 
+    fun examine(obj: Object?){
+        GameConstants.addLine(if(obj?.harvested!!) obj.definition?.emptyDesc!! else obj.definition?.desc!!)
     }
 
     fun examine(item: Item?){

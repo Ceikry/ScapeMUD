@@ -1,5 +1,7 @@
 import Entity.Item.ItemDefinition
 import Entity.Item.ItemRepository
+import Entity.Object.ObjectDefinition
+import Entity.Object.ObjectRepository
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -9,6 +11,33 @@ class DefinitionParser {
     val parser = JSONParser()
     var reader: FileReader? = null
     val statKeys = arrayOf("MeleeATKBonus","RangeATKBonus","MageATKBonus","MeleeDEFBonus","RangeDEFBonus","MageDEFBonus","MeleeDMGBonus","RangeDMGBonus","MageDMGBonus")
+
+    fun parseObjects(){
+        reader = FileReader("data/Objects.json")
+        val objects = parser.parse(reader) as JSONArray
+        var itemTotal = 0
+        for(it in objects) {
+            val obj = it as JSONObject
+            val id = obj["id"].toString().toInt()
+            val name = obj["name"].toString()
+            val desc = obj["description"].toString()
+            val emptyDesc = obj["emptyDesc"]
+            val harvestable = obj["harvestable"]
+            val harvestAmt = obj["harvestAmt"]
+            val harvestID = obj["harvestID"]
+
+            val newObj = ObjectDefinition()
+            newObj.name = name
+            newObj.desc = desc
+            newObj.emptyDesc = (emptyDesc ?: "").toString()
+            newObj.harvestable = (harvestable ?: false) as Boolean
+            newObj.harvestAmount = (harvestAmt ?: 0).toString().toInt()
+            newObj.harvestID = (harvestID ?: -1).toString().toInt()
+
+            ObjectRepository.add(id, newObj)
+            itemTotal++
+        }
+    }
 
     fun parseItems() {
         reader = FileReader("data/Items.json")
