@@ -47,6 +47,5 @@ class DefinitionParser {
             ItemRepository.add(id,newItem)
             itemTotal++
         }
-        println("Startup: Parsed $itemTotal item definitions.")
     }
 }

@@ -18,7 +18,7 @@ class Player {
 
     fun equip(item: String){
         if(!hasItem(item)){
-            println("You can't wear an item you don't have.")
+            GameConstants.textQueue += System.lineSeparator() + "You can't wear an item you don't have."
         } else {
             val equipItem = cachedItem ?: Item(-1,0)
             if (equipItem.definition?.wieldable == true) {
@@ -29,10 +29,10 @@ class Player {
                         stats[i] += bonus
                     }
                     inventory.remove(equipItem)
-                    println(equipItem.definition.equipMsg)
+                    GameConstants.textQueue += System.lineSeparator() + equipItem.definition.equipMsg
                 }
             } else {
-                println("You can't wear that item.")
+                GameConstants.textQueue += System.lineSeparator() + "You can't wear that item."
             }
         }
     }
@@ -55,7 +55,7 @@ class Player {
             } else {
                 sb.append("nothing")
             }
-            println(sb.toString())
+            GameConstants.textQueue += System.lineSeparator() + sb.toString()
         }
     }
 
@@ -74,21 +74,21 @@ class Player {
                 8 -> sb.append("Mage  DMG Bonus: ")
             }
             sb.append(stats[i])
-            println(sb.toString())
+            GameConstants.textQueue += System.lineSeparator() + sb.toString()
             if((i + 1) % 3 == 0){
-                println("-------------------")
+                GameConstants.textQueue += System.lineSeparator() + "-------------------"
             }
         }
     }
 
     fun printInventory(){
         if(inventory.size > 0)
-            println("Your inventory contains the following items:")
+            GameConstants.textQueue += System.lineSeparator() + "Your inventory contains the following items:"
         else
-            println("Your inventory is empty.")
+            GameConstants.textQueue += System.lineSeparator() + "Your inventory is empty."
 
         for(item in inventory){
-            println("${item.definition?.name} " + if(item.amount > 1) "(${item.amount})" else "")
+            GameConstants.textQueue += System.lineSeparator() + "${item.definition?.name} " + if(item.amount > 1) "(${item.amount})" else ""
         }
     }
 

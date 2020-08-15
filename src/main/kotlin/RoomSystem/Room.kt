@@ -15,15 +15,15 @@ class Room {
 
     fun onEntry(){
         drawCardinals()
-        println(title)
-        println(entryText)
+        GameConstants.textQueue += System.lineSeparator() + title
+        GameConstants.textQueue += System.lineSeparator() + entryText
         printItems()
     }
 
     fun printItems(){
         if(items.isNotEmpty()){
             for(item in items){
-                println("On the ground you see ${item.definition?.name}")
+                GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.definition?.name}"
             }
         }
     }
@@ -58,9 +58,9 @@ class Room {
 
         val bottomLine = sb.toString()
 
-        println(topLine)
-        println(midLine)
-        println(bottomLine)
+        GameConstants.textQueue += System.lineSeparator() + topLine
+        GameConstants.textQueue += System.lineSeparator() + midLine
+        GameConstants.textQueue += System.lineSeparator() + bottomLine
     }
 
     fun look(){

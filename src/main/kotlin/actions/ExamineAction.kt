@@ -5,9 +5,10 @@ import Entity.Player
 
 class ExamineAction : Action() {
     override fun handle(player: Player, tokens: Array<String>) {
-        if(tokens.size < 2)
-            println("Examine what?").also { return }
-
+        if(tokens.size < 2) {
+            GameConstants.textQueue += System.lineSeparator() + "Examine what?"
+            return
+        }
         if(player.hasItem(tokens[1])) {
             val item = player.cachedItem
             examine(item)
@@ -22,9 +23,9 @@ class ExamineAction : Action() {
     }
 
     fun examine(item: Item?){
-        println("You take a closer look at ${item?.definition?.name}")
-        println("It's " + item?.definition?.desc)
-        println("It's worth " + item?.definition?.value)
+        GameConstants.textQueue += System.lineSeparator() + "You take a closer look at ${item?.definition?.name}"
+        GameConstants.textQueue += System.lineSeparator() + "It's " + item?.definition?.desc
+        GameConstants.textQueue += System.lineSeparator() + "It's worth " + item?.definition?.value
 
         if(item?.definition?.wieldable == true){
             printWieldableStats(item)
@@ -50,7 +51,7 @@ class ExamineAction : Action() {
                 else -> "Index out of bounds."
             })
             sb.append(bonus)
-            println(sb.toString())
+            GameConstants.textQueue += System.lineSeparator() + sb.toString()
         }
     }
 }
