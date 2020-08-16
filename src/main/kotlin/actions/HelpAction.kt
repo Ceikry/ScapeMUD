@@ -9,6 +9,14 @@ class HelpAction : Action() {
         } else {
             if(tokens[1] == "commands"){
                 printCommands()
+            } else {
+                var action = InputRepository.search(tokens[1])
+                if(action == null && GameConstants.BUILD_MODE){
+                    action = BuildRepository.search(tokens[1])
+                }
+                if(action == null) GameConstants.addLine("Topic ${tokens[1]} not found.").also { return }
+                GameConstants.addLine("---Help for ${tokens[1]} command---")
+                action?.printHelp()
             }
         }
     }
@@ -19,6 +27,7 @@ class HelpAction : Action() {
         for(i in InputRepository.values()){
             GameConstants.addLine(i.command)
         }
+        GameConstants.addLine("For more detailed info about a command, use help command_name")
         GameConstants.addLine("Movement: n,e,s,w,ne,nw,se,sw,up,down")
         if(GameConstants.BUILD_MODE) {
             GameConstants.addLine(System.lineSeparator())
@@ -29,5 +38,10 @@ class HelpAction : Action() {
             }
 
         }
+    }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: help topic")
+        GameConstants.addLine("help allows you to learn more about commands, lore, etc.")
     }
 }

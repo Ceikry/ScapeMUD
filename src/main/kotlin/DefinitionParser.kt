@@ -26,6 +26,7 @@ class DefinitionParser {
             val harvestAmt = obj["harvestAmt"]
             val harvestID = obj["harvestID"]
             val emptyName = obj["emptyName"]
+            val levelReq = obj["levelReq"]
 
             val newObj = ObjectDefinition()
             newObj.name = name
@@ -35,6 +36,7 @@ class DefinitionParser {
             newObj.harvestable = (harvestable ?: false) as Boolean
             newObj.harvestAmount = (harvestAmt ?: 0).toString().toInt()
             newObj.harvestID = (harvestID ?: -1).toString().toInt()
+            newObj.levelReq = (levelReq ?: 1).toString().toInt()
 
             ObjectRepository.add(id, newObj)
             itemTotal++

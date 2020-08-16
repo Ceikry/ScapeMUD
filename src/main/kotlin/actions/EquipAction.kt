@@ -10,4 +10,10 @@ class EquipAction : Action() {
         }
         player.equip(tokens[1])
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: equip item_name")
+        GameConstants.addLine("Equip allows you to put items from you inventory onto")
+        GameConstants.addLine("your body. Some equipment has level requirements.")
+    }
 }

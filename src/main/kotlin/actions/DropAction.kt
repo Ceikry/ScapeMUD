@@ -16,4 +16,10 @@ class DropAction : Action(){
             GameConstants.textQueue += System.lineSeparator() + "You drop ${item.definition?.name} on the floor."
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: drop item_name")
+        GameConstants.addLine("Drop allows you to drop items in your inventory")
+        GameConstants.addLine("onto the ground.")
+    }
 }

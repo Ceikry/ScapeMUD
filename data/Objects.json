@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Tree",
+    "emptyName": "Stump",
+    "description": "A sturdy tree",
+    "emptyDesc": "The recently-cut stump of a tree.",
+    "harvestable": true,
+    "harvestAmt": "1",
+    "harvestID": "3"
+  },
+  {
+    "id": "22",
+    "name": "Large Tree",
+    "emptyName": "Large Stump",
+    "description": "A sturdy tree",
+    "emptyDesc": "The recently-cut stump of a tree.",
+    "harvestable": true,
+    "harvestAmt": "5",
+    "harvestID": "3",
+    "levelReq": "5"
+  }
+]

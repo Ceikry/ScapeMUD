@@ -37,4 +37,9 @@ class AddAction : Action(){
             "." -> {player.enterRoom(r.id)}
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: add direction")
+        GameConstants.addLine("Adds an empty room in the given direction.")
+    }
 }

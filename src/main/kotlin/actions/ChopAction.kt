@@ -21,6 +21,9 @@ class ChopAction : Action(){
                 if(!player.hasItem("axe")){
                     GameConstants.addLine("You need an axe to chop a tree.").also { return }
                 }
+                if(player.skills.skills[Skills.WOODCUTTING].level < obj.definition.levelReq){
+                    GameConstants.addLine("You need a woodcutting level of ${obj.definition.levelReq} to cut this tree.").also { return }
+                }
                 if(obj.harvested){
                     GameConstants.addLine("This tree has already been harvested.").also { return }
                 }
@@ -48,5 +51,12 @@ class ChopAction : Action(){
         } else {
             GameConstants.addLine("You see no such thing.")
         }
+    }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: chop name_of_object")
+        GameConstants.addLine("Chop allows you to chop trees and some other very specific things,")
+        GameConstants.addLine("provided that you have an axe in your inventory. For most trees, you")
+        GameConstants.addLine("also need to have the appropriate woodcutting level for that tree.")
     }
 }

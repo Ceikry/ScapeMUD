@@ -1,0 +1,64 @@
+[
+  {
+    "exitE": "0",
+    "exitNW": "0",
+    "exitSW": "0",
+    "objects": [
+    ],
+    "roomID": "1",
+    "exitNE": "0",
+    "exitS": "0",
+    "exitDOWN": "0",
+    "exitSE": "0",
+    "exitN": "2",
+    "roomTitle": "Newbie Zone: First Steps ",
+    "exitUP": "0",
+    "items": [],
+    "exitW": "0",
+    "desc": "Welcome to the newbie zone, where you'll learn how to play! First thing's first, type `help` to see all the commands available to you.  Once you've done that, go ahead and move to the room north of here.  "
+  },
+  {
+    "exitE": "3",
+    "exitNW": "0",
+    "exitSW": "0",
+    "objects": [],
+    "roomID": "2",
+    "exitNE": "0",
+    "exitS": "1",
+    "exitDOWN": "0",
+    "exitSE": "0",
+    "exitN": "0",
+    "roomTitle": "Newbie Zone: The Road to Discovery ",
+    "exitUP": "0",
+    "items": [
+      {
+        "amount": "1",
+        "id": "2"
+      }
+    ],
+    "exitW": "0",
+    "desc": "Glad you made it! Remember that `help` command from the last room? Well it has more uses too! You can do `help command_name` to get more information about any command. Go ahead and try that with `help take`. Once you've done that, try to take the axe from the ground and then head east. "
+  },
+  {
+    "exitE": "0",
+    "exitNW": "0",
+    "exitSW": "0",
+    "objects": [
+      {
+        "id": 1,
+        "harvested": false
+      }
+    ],
+    "roomID": "3",
+    "exitNE": "0",
+    "exitS": "0",
+    "exitDOWN": "0",
+    "exitSE": "0",
+    "exitN": "0",
+    "roomTitle": "Newbie Zone: Skilling and Action Repetition ",
+    "exitUP": "0",
+    "items": [],
+    "exitW": "2",
+    "desc": "If you take a `look` you'll notice there's a tree here. Go ahead and try to `chop tree`. Notice how you only chopped once? This is where action repetition comes into play. Now try `#5 chop tree`. Boom! See, you repeated that action several times. This concludes the basics of skilling and action repetition. "
+  }
+]

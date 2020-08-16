@@ -17,4 +17,10 @@ class TakeAction : Action() {
         }
         GameConstants.textQueue += System.lineSeparator() + "You see no such item."
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: take item_name")
+        GameConstants.addLine("Take allows you to take an item from the ground")
+        GameConstants.addLine("and place it in your inventory.")
+    }
 }

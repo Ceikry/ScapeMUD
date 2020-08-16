@@ -24,4 +24,8 @@ class MovementAction : Action() {
             player.enterRoom(r.id)
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("E")
+    }
 }

@@ -49,6 +49,7 @@ class MainWindow : JFrame(){
 
         outputField.isEditable = false
         outputField.lineWrap = true
+        outputField.wrapStyleWord = true
         outputField.background = Color.DARK_GRAY
         outputField.foreground = Color.WHITE
         outputField.font = cp.font

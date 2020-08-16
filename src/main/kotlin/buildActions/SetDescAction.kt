@@ -14,4 +14,9 @@ class SetDescAction : Action() {
             player.currentRoom!!.entryText = sb.toString()
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: sd type your description here")
+        GameConstants.addLine("sd sets the description for a room.")
+    }
 }

@@ -31,4 +31,10 @@ class LookAction : Action() {
             player.currentRoom?.look()
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: look or look direction")
+        GameConstants.addLine("look by itself prints the details about the current room again.")
+        GameConstants.addLine("look direction prints the contents of the room in that direction.")
+    }
 }

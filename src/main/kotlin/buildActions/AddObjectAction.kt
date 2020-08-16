@@ -18,4 +18,9 @@ class AddObjectAction : Action() {
             player.currentRoom!!.objects.add(Object(id))
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: addobj id")
+        GameConstants.addLine("Adds and object with the given id to the current room.")
+    }
 }

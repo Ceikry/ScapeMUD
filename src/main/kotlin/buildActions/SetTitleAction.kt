@@ -15,4 +15,9 @@ class SetTitleAction : Action() {
             player.currentRoom!!.title = sb.toString()
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: st type the title of the room here.")
+        GameConstants.addLine("st sets the title for the current room.")
+    }
 }

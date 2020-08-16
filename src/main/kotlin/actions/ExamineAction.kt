@@ -65,4 +65,10 @@ class ExamineAction : Action() {
             GameConstants.textQueue += System.lineSeparator() + sb.toString()
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: examine name")
+        GameConstants.addLine("Examine allows you to see more detailed information")
+        GameConstants.addLine("about just about anything. Objects, items, NPCs, etc.")
+    }
 }

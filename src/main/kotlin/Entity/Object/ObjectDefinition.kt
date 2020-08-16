@@ -9,4 +9,5 @@ class ObjectDefinition {
     var harvestAmount: Int? = 0
     var harvestID: Int? = 0
     var respawnTime: Int = 25
+    var levelReq: Int = 1
 }

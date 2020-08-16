@@ -19,4 +19,9 @@ class AddItemAction : Action() {
             player.currentRoom!!.items.add(Item(id,amount!!))
         }
     }
+
+    override fun printHelp() {
+        GameConstants.addLine("Usage: additem id amount")
+        GameConstants.addLine("Adds an item with given id and amount to the current room.")
+    }
 }
