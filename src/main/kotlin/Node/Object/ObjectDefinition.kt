@@ -1,4 +1,4 @@
-package Entity.Object
+package Node.Object
 
 class ObjectDefinition {
     var name: String = ""
@@ -10,4 +10,6 @@ class ObjectDefinition {
     var harvestID: Int? = 0
     var respawnTime: Int = 25
     var levelReq: Int = 1
+    var hasContainer = false
+    var containerSize = 0
 }

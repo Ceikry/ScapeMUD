@@ -1,6 +1,9 @@
 package actions
 
-import Entity.Player
+import Node.Container
+import Node.Item.Item
+import Node.Object.Object
+import Node.Player
 
 class TakeAction : Action() {
     override fun handle(player: Player, tokens: Array<String>) {
@@ -8,19 +11,42 @@ class TakeAction : Action() {
             GameConstants.textQueue += System.lineSeparator() + "Take what?"
             return
         }
+        if(tokens.size == 3){
+            val containerNode: Any? = if(player.hasItem(tokens[2])){
+                player.cachedItem
+            } else if(player.currentRoom!!.hasObject(tokens[2])) {
+                player.currentRoom!!.cachedObject
+            } else null
+            containerNode ?: GameConstants.addLine("You don't see a ${tokens[2]} here.").also { return }
+            var nodeName = ""
+            val container: Container? = if(containerNode is Item && containerNode.container != null){
+                containerNode.container.also { nodeName = containerNode.definition?.name!! }
+            } else if (containerNode is Object && containerNode.container != null){
+                containerNode.container.also { nodeName = containerNode.definition?.name!! }
+            } else null
+
+            container ?: GameConstants.addLine("That can't store items.").also { return }
+            if(container?.hasItem(tokens[1]) == true){
+                if(!container.withdrawItem(player.inventory,container.cachedItem!!)){
+                    GameConstants.addLine("You don't have space for that.")
+                } else {
+                    GameConstants.addLine("You take ${container.cachedItem?.definition?.name} from $nodeName")
+                }
+            }
+            return
+        }
         if(player.currentRoom?.hasItem(tokens[1]) == true){
             val item = player.currentRoom!!.getItem(tokens[1])
             GameConstants.textQueue += System.lineSeparator() + "You take ${item.definition?.name} and place it in your bag."
-            player.currentRoom!!.items.remove(item)
-            player.addItem(item)
+            player.currentRoom!!.items.withdrawItem(player.inventory,item)
             return
         }
         GameConstants.textQueue += System.lineSeparator() + "You see no such item."
     }
 
     override fun printHelp() {
-        GameConstants.addLine("Usage: take item_name")
-        GameConstants.addLine("Take allows you to take an item from the ground")
-        GameConstants.addLine("and place it in your inventory.")
+        GameConstants.addLine("Usage: take item_name or take item_name container_name")
+        GameConstants.addLine("Take allows you to take an item from the ground or from")
+        GameConstants.addLine("a container and place it in your inventory.")
     }
 }

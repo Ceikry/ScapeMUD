@@ -1,6 +1,6 @@
 package ActionPulse
 
-import Entity.Object.Object
+import Node.Object.Object
 
 class ObjectRespawn(val obj: Object) : ActionPulse(obj.definition?.respawnTime!!){
     override fun pulse(): Boolean {

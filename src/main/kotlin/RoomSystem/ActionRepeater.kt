@@ -1,9 +1,8 @@
 package RoomSystem
 
 import ActionPulse.ActionPulse
-import Entity.Player
+import Node.Player
 import actions.Action
-import java.util.concurrent.Executors
 
 class ActionRepeater(val action: Action){
     fun repeat(amount: Int, player: Player, tokens: Array<String>){

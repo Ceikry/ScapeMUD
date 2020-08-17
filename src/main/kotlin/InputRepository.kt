@@ -11,7 +11,9 @@ enum class InputRepository(var command: String, action: Action) {
     GEAR("gear",GearAction()),
     STATS("stats",StatsAction()),
     HELP("help",HelpAction()),
-    CHOP("chop",ChopAction());
+    CHOP("chop",ChopAction()),
+    PUT("put",PutAction()),
+    ATTACK("attack",AttackAction());
 
     var action: Action? = action
 

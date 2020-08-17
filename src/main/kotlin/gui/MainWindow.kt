@@ -1,6 +1,6 @@
 package gui
 
-import Entity.Player
+import Node.Player
 import GameConstants
 import InputInterpreter
 import java.awt.Color
@@ -10,9 +10,6 @@ import java.awt.Font
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.*
-import javax.swing.text.DefaultCaret
-
-
 
 
 class MainWindow : JFrame(){

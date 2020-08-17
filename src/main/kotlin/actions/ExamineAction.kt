@@ -1,8 +1,9 @@
 package actions
 
-import Entity.Item.Item
-import Entity.Object.Object
-import Entity.Player
+import Node.Container
+import Node.Item.Item
+import Node.Object.Object
+import Node.Player
 
 class ExamineAction : Action() {
     override fun handle(player: Player, tokens: Array<String>) {
@@ -31,6 +32,10 @@ class ExamineAction : Action() {
 
     fun examine(obj: Object?){
         GameConstants.addLine(if(obj?.harvested!!) obj.definition?.emptyDesc!! else obj.definition?.desc!!)
+        if(obj.container != null){
+            GameConstants.addLine("${obj.definition.name} has used ${obj.container!!.getUsedSlots()} out of ${obj.container!!.getSize()} spaces and contains:")
+            printInventory(obj.container!!)
+        }
     }
 
     fun examine(item: Item?){
@@ -40,6 +45,16 @@ class ExamineAction : Action() {
 
         if(item?.definition?.wieldable == true){
             printWieldableStats(item)
+        }
+        if(item?.container != null){
+            GameConstants.addLine(item.definition?.name!! + " has used ${item.container!!.getUsedSlots()} out of ${item.container!!.getSize()} spaces and contains:")
+            printInventory(item.container!!)
+        }
+    }
+
+    fun printInventory(con: Container){
+        for(item in con.getItems()){
+            GameConstants.addLine("${item.getName()} ${if(item.amount > 1) "(${item.amount})" else ""}")
         }
     }
 
@@ -70,5 +85,6 @@ class ExamineAction : Action() {
         GameConstants.addLine("Usage: examine name")
         GameConstants.addLine("Examine allows you to see more detailed information")
         GameConstants.addLine("about just about anything. Objects, items, NPCs, etc.")
+        GameConstants.addLine("Examine also shows the inventory of containers.")
     }
 }

@@ -1,17 +1,20 @@
-package Entity
+package Node
 
-import Entity.Item.Item
+import Node.Item.Item
 import RoomSystem.Room
 import RoomSystem.RoomManager
 
 class Player {
     var currentRoom: Room? = null
-    val inventory = ArrayList<Item>()
+    val inventory = Container(28)
     val equipment = Array<Item>(8){Item(-1,0)}
     val stats = Array<Int>(9){0}
     var cachedItem: Item? = null
     var locked = false
     var skills: Skills = Skills()
+    var hp = 10
+    var maxHp = 10
+    var style: AttStyle = AttStyle.MELEE
 
     fun init() {
         if(currentRoom == null && RoomManager.rooms.isNotEmpty()){
@@ -36,7 +39,7 @@ class Player {
                         val bonus = equipItem.definition.stats[i]
                         stats[i] += bonus
                     }
-                    inventory.remove(equipItem)
+                    inventory.removeItem(equipItem)
                     GameConstants.textQueue += System.lineSeparator() + equipItem.definition.equipMsg
                 }
             } else {
@@ -90,19 +93,19 @@ class Player {
     }
 
     fun printInventory(){
-        if(inventory.size > 0)
+        if(!inventory.isEmpty())
             GameConstants.textQueue += System.lineSeparator() + "Your inventory contains the following items:"
         else
             GameConstants.textQueue += System.lineSeparator() + "Your inventory is empty."
 
-        for(item in inventory){
+        for(item in inventory.getItems()){
             GameConstants.textQueue += System.lineSeparator() + "${item.definition?.name} " + if(item.amount > 1) "(${item.amount})" else ""
         }
-        GameConstants.addLine("You have ${inventory.size} items in your inventory, with space for ${28 - inventory.size} more.")
+        GameConstants.addLine("You have ${inventory.getUsedSlots()} items in your inventory, with space for ${inventory.getFreeSlots()} more.")
     }
 
     fun hasItem(item: String): Boolean{
-        for(it in inventory){
+        for(it in inventory.getItems()){
             if(it.definition?.name?.contains(item) == true){
                 cachedItem = it
                 return true
@@ -112,11 +115,6 @@ class Player {
     }
 
     fun addItem(item: Item): Boolean {
-        if(inventory.size >= 28){
-            GameConstants.addLine("You do not have space for that.")
-            return false
-        }
-        inventory.add(item)
-        return true
+        return inventory.addItem(item)
     }
 }

@@ -1,7 +1,16 @@
-package Entity.Item
+package Node.Item
+
+import Node.Container
 
 class Item(val id: Int, var amount: Int){
     val definition = ItemRepository.forId(id)
+    var container: Container? = null
+
+    init {
+        if(definition!!.hasContainer){
+            container = Container(definition.containerSize)
+        }
+    }
 
     fun getName(): String {
         var s = definition?.name

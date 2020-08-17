@@ -1,14 +1,12 @@
-import Entity.Item.Item
-import RoomSystem.Room
+import Node.NPC.DropTables
 import RoomSystem.RoomManager
-import Entity.Player
-import gui.MainWindow
 import java.util.*
-import kotlin.math.pow
 
 fun main() {
     DefinitionParser().parseItems()
     DefinitionParser().parseObjects()
+    DefinitionParser().parseNPCs()
+    DropTables.map()
     RoomManager.init("data/rooms.json")
     gameloop()
 }

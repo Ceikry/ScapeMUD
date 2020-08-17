@@ -1,6 +1,6 @@
 package actions
 
-import Entity.Player
+import Node.Player
 
 abstract class Action{
     abstract fun handle(player: Player, tokens: Array<String>)

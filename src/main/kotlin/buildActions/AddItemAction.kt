@@ -1,7 +1,7 @@
 package buildActions
 
-import Entity.Item.Item
-import Entity.Player
+import Node.Item.Item
+import Node.Player
 import actions.Action
 
 class AddItemAction : Action() {
@@ -16,7 +16,7 @@ class AddItemAction : Action() {
                 return
             }
 
-            player.currentRoom!!.items.add(Item(id,amount!!))
+            player.currentRoom!!.items.addItem(Item(id,amount!!))
         }
     }
 

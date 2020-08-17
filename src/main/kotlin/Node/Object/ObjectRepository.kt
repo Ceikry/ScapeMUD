@@ -1,4 +1,4 @@
-package Entity.Object
+package Node.Object
 
 class ObjectRepository {
     companion object{

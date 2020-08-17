@@ -1,7 +1,11 @@
-import Entity.Item.ItemDefinition
-import Entity.Item.ItemRepository
-import Entity.Object.ObjectDefinition
-import Entity.Object.ObjectRepository
+import Node.Item.ItemDefinition
+import Node.Item.ItemRepository
+import Node.NPC.NPC
+import Node.NPC.NPCDefinition
+import Node.NPC.NPCRepository
+import Node.Object.ObjectDefinition
+import Node.Object.ObjectRepository
+import com.sun.org.apache.xpath.internal.operations.Bool
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -52,10 +56,17 @@ class DefinitionParser {
             val id = item["id"].toString().toInt()
             val name = item["name"].toString()
             val desc = item["description"].toString()
+            val hasContainer = item["hasContainer"]
+            val containerSize = item["containerSize"]
+            val stackable = item["stackable"]
+
             val newItem = ItemDefinition()
             newItem.name = name
             newItem.desc = desc
             newItem.value = item["value"].toString().toInt()
+            newItem.hasContainer = (hasContainer ?: false) as Boolean
+            newItem.containerSize = (containerSize ?: 0).toString().toInt()
+            newItem.stackable = (stackable ?: false) as Boolean
 
             if(item.containsKey("wieldable")){
                 newItem.wieldable = item["wieldable"] as Boolean
@@ -79,6 +90,25 @@ class DefinitionParser {
 
             ItemRepository.add(id,newItem)
             itemTotal++
+        }
+    }
+
+    fun parseNPCs(){
+        reader = FileReader("data/NPCs.json")
+        val npcs = parser.parse(reader) as JSONArray
+
+        for(it in npcs){
+            val npc = it as JSONObject
+            val id = npc["id"].toString().toInt()
+            val level = npc["level"].toString().toInt()
+            val name = npc["name"].toString()
+            val hp = npc["hp"].toString().toInt()
+            val newNPC = NPCDefinition()
+            newNPC.level = level
+            newNPC.hp = hp
+            newNPC.name = name
+
+            NPCRepository.add(id,newNPC)
         }
     }
 }

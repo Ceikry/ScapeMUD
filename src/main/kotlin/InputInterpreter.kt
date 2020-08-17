@@ -1,4 +1,4 @@
-import Entity.Player
+import Node.Player
 import RoomSystem.ActionRepeater
 import actions.Action
 import actions.MovementAction

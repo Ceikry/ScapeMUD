@@ -1,7 +1,7 @@
 package buildActions
 
-import Entity.Object.Object
-import Entity.Player
+import Node.Object.Object
+import Node.Player
 import actions.Action
 
 class AddObjectAction : Action() {

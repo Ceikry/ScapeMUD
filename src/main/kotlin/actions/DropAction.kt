@@ -1,6 +1,6 @@
 package actions
 
-import Entity.Player
+import Node.Player
 
 class DropAction : Action(){
     override fun handle(player: Player, tokens: Array<String>) {
@@ -11,8 +11,7 @@ class DropAction : Action(){
         if(player.hasItem(tokens[1])){
             val item = player.cachedItem
             item ?: return
-            player.inventory.remove(item)
-            player.currentRoom?.items?.add(item)
+            player.inventory.withdrawItem(player.currentRoom!!.items,item)
             GameConstants.textQueue += System.lineSeparator() + "You drop ${item.definition?.name} on the floor."
         }
     }

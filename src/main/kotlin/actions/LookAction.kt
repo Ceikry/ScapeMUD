@@ -1,6 +1,6 @@
 package actions
 
-import Entity.Player
+import Node.Player
 import RoomSystem.RoomManager
 
 class LookAction : Action() {

@@ -7,7 +7,8 @@ enum class BuildRepository(var command: String, action: Action) {
     SD("sd",SetDescAction()),
     SAVE("save",SaveAction()),
     ADDITEM("additem",AddItemAction()),
-    ADDOBJ("addobj",AddObjectAction());
+    ADDOBJ("addobj",AddObjectAction()),
+    ADDNPC("addnpc",AddNPCAction());
 
     var action: Action? = action
 

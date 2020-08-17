@@ -1,11 +1,9 @@
 package actions
 
-import ActionPulse.ActionPulse
 import ActionPulse.ObjectRespawn
-import Entity.Item.Item
-import Entity.Player
-import Entity.Skills
-import gui.MainWindow
+import Node.Item.Item
+import Node.Player
+import Node.Skills
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -27,7 +25,7 @@ class ChopAction : Action(){
                 if(obj.harvested){
                     GameConstants.addLine("This tree has already been harvested.").also { return }
                 }
-                if(player.inventory.size >= 28){
+                if(player.inventory.isFull()){
                     GameConstants.addLine("You are out of inventory space.")
                     return
                 }
@@ -42,7 +40,7 @@ class ChopAction : Action(){
                     player.skills.addXP(Skills.WOODCUTTING,10.0)
                     GameConstants.addLine("You harvest a log from the tree.")
                     GameConstants.addLine(" ${player.skills.skills[Skills.WOODCUTTING].xpToLevel} experience until next ${player.skills.skills[Skills.WOODCUTTING].name} level.")
-                    player.inventory.add(Item(obj.definition.harvestID!!,1))
+                    player.addItem(Item(obj.definition.harvestID!!,1))
                     obj.amtLeft -= 1
                 } else {
                     GameConstants.addLine("You swing your axe at the tree.")

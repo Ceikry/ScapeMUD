@@ -1,7 +1,9 @@
 package RoomSystem
 
-import Entity.Item.Item
-import Entity.Object.Object
+import Node.Container
+import Node.Item.Item
+import Node.NPC.NPC
+import Node.Object.Object
 
 /**
  * Represents a room.
@@ -11,26 +13,29 @@ class Room {
     var entryText: String = ""
     var title: String = ""
     val exits = ExitList()
-    val items= ArrayList<Item>()
+    val items= Container(250)
     val objects = ArrayList<Object>()
+    val npcs = ArrayList<NPC>()
     var cachedItem: Item? = null
     var cachedObject: Object? = null
+    var cachedNPC: NPC? = null
     var id: Int = RoomManager.getNextOpen()
 
     fun onEntry(){
         drawCardinals()
         GameConstants.textQueue += System.lineSeparator() + ">> " + title + "<<"
         GameConstants.textQueue += System.lineSeparator() + entryText
-        if(items.isNotEmpty() || objects.isNotEmpty()) {
+        if(!items.isEmpty() || objects.isNotEmpty() || npcs.isNotEmpty()) {
             GameConstants.textQueue += System.lineSeparator() + "--------"
             printItems()
             printObjects()
+            printNPCs()
         }
     }
 
     fun printItems(){
-        if(items.isNotEmpty()){
-            for(item in items){
+        if(!items.isEmpty()){
+            for(item in items.getItems()){
                 GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.getName()}" + if(item.amount > 1) "(${item.amount})" else ""
             }
         }
@@ -40,6 +45,18 @@ class Room {
         if(objects.isNotEmpty()){
             for(obj in objects){
                 GameConstants.addLine("You see a ${if(obj.harvested) obj.definition?.emptyName else obj.definition?.name} here.")
+            }
+        }
+    }
+
+    fun printNPCs(){
+        if(npcs.isNotEmpty()){
+            for(npc in npcs){
+                GameConstants.addLine("You see ${
+                if(npc.alive) 
+                    "a ${npc.definition?.name}(level ${npc.definition?.level}) here." 
+                else "the corpse of a ${npc.definition?.name} here."
+                }")
             }
         }
     }
@@ -99,6 +116,18 @@ class Room {
         return false
     }
 
+    fun hasNPC(name: String): Boolean {
+        for(npc in npcs){
+            if(npc.alive){
+                if(npc.definition?.name?.toLowerCase()?.contains(name) == true){
+                    cachedNPC = npc
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     fun getObject(name: String): Object {
         if(cachedObject != null)
             if(cachedObject!!.definition?.name?.toLowerCase()?.contains(name) == true){
@@ -113,7 +142,7 @@ class Room {
     }
 
     fun hasItem(name: String): Boolean{
-        for(item in items){
+        for(item in items.getItems()){
             if(item.definition?.name?.contains(name) == true){
                 cachedItem = item
                 return true
@@ -127,7 +156,7 @@ class Room {
             if(cachedItem!!.definition?.name?.contains(name) == true){
                 return cachedItem!!
             }
-        for(item in items){
+        for(item in items.getItems()){
             if(item.definition?.name?.contains(name) == true){
                 return item
             }

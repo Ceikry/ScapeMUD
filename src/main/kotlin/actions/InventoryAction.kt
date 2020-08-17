@@ -1,6 +1,6 @@
 package actions
 
-import Entity.Player
+import Node.Player
 
 class InventoryAction : Action() {
     override fun handle(player: Player, tokens: Array<String>) {

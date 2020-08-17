@@ -1,7 +1,7 @@
 package RoomSystem
 
-import Entity.Item.Item
-import Entity.Object.Object
+import Node.Item.Item
+import Node.Object.Object
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -54,7 +54,7 @@ class RoomManager {
                         i ?: continue
                         val item = i as JSONObject
                         val it = Item(item["id"].toString().toInt(),item["amount"].toString().toInt())
-                        r.items.add(it)
+                        r.items.addItem(it)
                     }
                     for(i in objects){
                         i ?: continue
@@ -89,7 +89,7 @@ class RoomManager {
                 ro.put("exitDOWN",exits.down.toString())
                 val items = JSONArray()
                 val objects = JSONArray()
-                for(i in room.items){
+                for(i in room.items.getItems()){
                     val it = JSONObject()
                     it.put("id",i.id.toString())
                     it.put("amount",i.amount.toString())

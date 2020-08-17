@@ -1,6 +1,6 @@
 package buildActions
 
-import Entity.Player
+import Node.Player
 import actions.Action
 
 class SetDescAction : Action() {

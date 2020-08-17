@@ -1,5 +1,5 @@
 import ActionPulse.ActionPulse
-import Entity.Player
+import Node.Player
 import gui.Login
 import gui.MainWindow
 
