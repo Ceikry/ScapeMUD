@@ -1,6 +1,8 @@
 # ScapeMUD
 A MUD written in Kotlin, inspired by RuneScape and SMAUG. I make this for fun.
 
+There's a Discord server for this, if that's your thing: https://discord.gg/FA2uas
+
 ## Features as of Aug 18, 2020
 * Room Builder
 * Movement
