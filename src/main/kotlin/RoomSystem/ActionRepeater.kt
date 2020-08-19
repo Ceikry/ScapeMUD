@@ -13,8 +13,7 @@ class ActionRepeater(val action: Action){
     private class ActionRepeatPulse(var amount: Int, val action: Action, val player: Player, val tokens: Array<String>) : ActionPulse(){
         override fun pulse(): Boolean {
             action.handle(player,tokens)
-            GameConstants.gui.refresh()
-            val done = amount-- <= 0
+            val done = amount-- <= 1
             if(done)
                 player.locked = false
             return done

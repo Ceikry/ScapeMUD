@@ -6,9 +6,11 @@ import Node.Object.Object
 import Node.Player
 
 class ExamineAction : Action() {
+    var player: Player = Player()
     override fun handle(player: Player, tokens: Array<String>) {
+        this.player = player
         if(tokens.size < 2) {
-            GameConstants.textQueue += System.lineSeparator() + "Examine what?"
+            player.addLine("Examine what?")
             return
         }
         if(player.hasItem(tokens[1])) {
@@ -31,30 +33,30 @@ class ExamineAction : Action() {
     }
 
     fun examine(obj: Object?){
-        GameConstants.addLine(if(obj?.harvested!!) obj.definition?.emptyDesc!! else obj.definition?.desc!!)
+        player.addLine(if(obj?.harvested!!) obj.definition?.emptyDesc!! else obj.definition?.desc!!)
         if(obj.container != null){
-            GameConstants.addLine("${obj.definition.name} has used ${obj.container!!.getUsedSlots()} out of ${obj.container!!.getSize()} spaces and contains:")
+            player.addLine("${obj.definition.name} has used ${obj.container!!.getUsedSlots()} out of ${obj.container!!.getSize()} spaces and contains:")
             printInventory(obj.container!!)
         }
     }
 
     fun examine(item: Item?){
-        GameConstants.textQueue += System.lineSeparator() + "You take a closer look at ${item?.definition?.name}"
-        GameConstants.textQueue += System.lineSeparator() + "It's " + item?.definition?.desc
-        GameConstants.textQueue += System.lineSeparator() + "It's worth " + item?.definition?.value
+        player.addLine("You take a closer look at ${item?.definition?.name}")
+        player.addLine("It's " + item?.definition?.desc)
+        player.addLine("It's worth " + item?.definition?.value)
 
         if(item?.definition?.wieldable == true){
             printWieldableStats(item)
         }
         if(item?.container != null){
-            GameConstants.addLine(item.definition?.name!! + " has used ${item.container!!.getUsedSlots()} out of ${item.container!!.getSize()} spaces and contains:")
+            player.addLine(item.definition?.name!! + " has used ${item.container!!.getUsedSlots()} out of ${item.container!!.getSize()} spaces and contains:")
             printInventory(item.container!!)
         }
     }
 
     fun printInventory(con: Container){
         for(item in con.getItems()){
-            GameConstants.addLine("${item.getName()} ${if(item.amount > 1) "(${item.amount})" else ""}")
+            player.addLine("${item.getName()} ${if(item.amount > 1) "(${item.amount})" else ""}")
         }
     }
 
@@ -77,14 +79,14 @@ class ExamineAction : Action() {
                 else -> "Index out of bounds."
             })
             sb.append(bonus)
-            GameConstants.textQueue += System.lineSeparator() + sb.toString()
+            player.addLine(sb.toString())
         }
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: examine name")
-        GameConstants.addLine("Examine allows you to see more detailed information")
-        GameConstants.addLine("about just about anything. Objects, items, NPCs, etc.")
-        GameConstants.addLine("Examine also shows the inventory of containers.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: examine name")
+        player.addLine("Examine allows you to see more detailed information")
+        player.addLine("about just about anything. Objects, items, NPCs, etc.")
+        player.addLine("Examine also shows the inventory of containers.")
     }
 }

@@ -4,6 +4,7 @@ import Node.Container
 import Node.Item.Item
 import Node.NPC.NPC
 import Node.Object.Object
+import Node.Player
 
 /**
  * Represents a room.
@@ -16,43 +17,57 @@ class Room {
     val items= Container(250)
     val objects = ArrayList<Object>()
     val npcs = ArrayList<NPC>()
+    val players = ArrayList<Player>()
     var cachedItem: Item? = null
     var cachedObject: Object? = null
     var cachedNPC: NPC? = null
     var id: Int = RoomManager.getNextOpen()
 
-    fun onEntry(){
-        drawCardinals()
-        GameConstants.textQueue += System.lineSeparator() + ">> " + title + "<<"
-        GameConstants.textQueue += System.lineSeparator() + entryText
+    fun onEntry(player: Player){
+        drawCardinals(player)
+        player.addLine(">> " + ColorCore.build(title,ColorCore.GREEN, ColorCore.UNDERLINE,ColorCore.FRAMED) + "<<")
+        player.addLine(entryText)
         if(!items.isEmpty() || objects.isNotEmpty() || npcs.isNotEmpty()) {
-            GameConstants.textQueue += System.lineSeparator() + "--------"
-            printItems()
-            printObjects()
-            printNPCs()
+            player.addLine("--------")
+            printItems(player)
+            printObjects(player)
+            printNPCs(player)
+            if(!players.contains(player))
+                players.add(player)
+            for(other in players){
+                if(other == player) continue
+                player.addLine("You see ${other.name} standing here.")
+            }
         }
     }
 
-    fun printItems(){
+    fun announce(player: Player){
+        for(other in players){
+            if(other == player) continue
+            other.addLine("${player.name} has come into the area.")
+        }
+    }
+
+    fun printItems(player: Player){
         if(!items.isEmpty()){
             for(item in items.getItems()){
-                GameConstants.textQueue += System.lineSeparator() + "On the ground you see ${item.getName()}" + if(item.amount > 1) "(${item.amount})" else ""
+                player.addLine("On the ground you see ${item.getName()}" + if(item.amount > 1) "(${item.amount})" else "")
             }
         }
     }
 
-    fun printObjects(){
+    fun printObjects(player: Player){
         if(objects.isNotEmpty()){
             for(obj in objects){
-                GameConstants.addLine("You see a ${if(obj.harvested) obj.definition?.emptyName else obj.definition?.name} here.")
+                player.addLine("You see a ${if(obj.harvested) obj.definition?.emptyName else obj.definition?.name} here.")
             }
         }
     }
 
-    fun printNPCs(){
+    fun printNPCs(player: Player){
         if(npcs.isNotEmpty()){
             for(npc in npcs){
-                GameConstants.addLine("You see ${
+                player.addLine("You see ${
                 if(npc.alive) 
                     "a ${npc.definition?.name}(level ${npc.definition?.level}) here." 
                 else "the corpse of a ${npc.definition?.name} here."
@@ -61,7 +76,7 @@ class Room {
         }
     }
 
-    fun drawCardinals(){
+    fun drawCardinals(player: Player){
         var sb = StringBuilder()
         if(exits.hasNW()) sb.append("NW") else sb.append("/-")
         sb.append("--")
@@ -91,13 +106,13 @@ class Room {
 
         val bottomLine = sb.toString()
 
-        GameConstants.textQueue += System.lineSeparator() + topLine
-        GameConstants.textQueue += System.lineSeparator() + midLine
-        GameConstants.textQueue += System.lineSeparator() + bottomLine
+        player.addLine(topLine)
+        player.addLine(midLine)
+        player.addLine(bottomLine)
     }
 
-    fun look(){
-        onEntry()
+    fun look(player: Player){
+        onEntry(player)
     }
 
     fun hasObject(name: String): Boolean {

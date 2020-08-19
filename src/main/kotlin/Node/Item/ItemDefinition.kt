@@ -14,4 +14,6 @@ class ItemDefinition{
     var hasContainer = false
     var containerSize = 0
     var attStyle: AttStyle = AttStyle.MELEE
+    var requirements = hashMapOf<Int,Int>()
+
 }

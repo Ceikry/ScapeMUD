@@ -1,0 +1,55 @@
+{
+  "skills": [
+    {
+      "totalXP": "0.0",
+      "level": "1",
+      "index": "0",
+      "xpToLevel": "83.0",
+      "previousXPToLevel": "83.0"
+    },
+    {
+      "totalXP": "0.0",
+      "level": "1",
+      "index": "1",
+      "xpToLevel": "83.0",
+      "previousXPToLevel": "83.0"
+    }
+  ],
+  "currentRoom": "1",
+  "password": "biggestdong",
+  "equipment": [
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    },
+    {
+      "amount": "0",
+      "id": "-1"
+    }
+  ],
+  "items": []
+}

@@ -3,8 +3,7 @@
     "exitE": "0",
     "exitNW": "0",
     "exitSW": "0",
-    "objects": [
-    ],
+    "objects": [],
     "roomID": "1",
     "exitNE": "0",
     "exitS": "0",
@@ -30,12 +29,7 @@
     "exitN": "0",
     "roomTitle": "Newbie Zone: The Road to Discovery ",
     "exitUP": "0",
-    "items": [
-      {
-        "amount": "1",
-        "id": "2"
-      }
-    ],
+    "items": [],
     "exitW": "0",
     "desc": "Glad you made it! Remember that `help` command from the last room? Well it has more uses too! You can do `help command_name` to get more information about any command. Go ahead and try that with `help take`. Once you've done that, try to take the axe from the ground and then head east. "
   },

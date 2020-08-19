@@ -16,27 +16,86 @@
     "id": "1",
     "description": "a weak but cheap sword.",
     "name": "a bronze sword",
-    "value": "100",
+    "value": "50",
     "wieldable": true,
     "wieldSlot": "0",
     "equipMsg": "You brandish the bronze sword.",
     "MeleeATKBonus": "1",
-    "MeleeDMGBonus": "1"
+    "MeleeDMGBonus": "1",
+    "requirements": "1,1"
   },
   {
     "id": "2",
+    "description": "a cheap but effective sword.",
+    "name": "an iron sword",
+    "value": "125",
+    "wieldable": true,
+    "wieldSlot": "0",
+    "equipMsg": "You brandish the iron sword.",
+    "MeleeATKBonus": "2",
+    "MeleeDMGBonus": "1",
+    "requirements": "1,1"
+  },
+  {
+    "id": "3",
+    "description": "a decently crafted blade.",
+    "name": "a steel sword",
+    "value": "250",
+    "wieldable": true,
+    "wieldSlot": "0",
+    "equipMsg": "You brandish the steel sword.",
+    "MeleeATKBonus": "3",
+    "MeleeDMGBonus": "3",
+    "requirements": "1,10"
+  },
+  {
+    "id": "4",
+    "description": "a finely crafted blade.",
+    "name": "a mithril blade.",
+    "value": "500",
+    "wieldable": true,
+    "wieldSlot": "0",
+    "equipMsg": "As you don the mithril blade, you feel powerful.",
+    "MeleeATKBonus": "5",
+    "MeleeDMGBonus": "6",
+    "requirements": "1,20"
+  },
+  {
+    "id": "5",
+    "description": "an expertly crafted weapon.",
+    "name": "an adamantium warscythe.",
+    "value": "1250",
+    "wieldable": true,
+    "equipMsg": "As you take the scythe into your hands, you can feel the vibrations of its power.",
+    "MeleeATKBonus": "10",
+    "MeleeDMGBonus": "12",
+    "requirements": "1,30"
+  },
+  {
+    "id": "6",
+    "description": "a remarkably well-made weapon.",
+    "name": "a runite greatsword.",
+    "value": "2500",
+    "wieldable": true,
+    "equipMsg": "You fling the great heft of the weapon upon your shoulders.",
+    "MeleeATKBonus": "19",
+    "MeleeDMGBonus": "22",
+    "requirements": "1,40"
+  },
+  {
+    "id": "7",
     "name": "an axe",
     "description": "used for chopping things, usually trees.",
     "value": "25"
   },
   {
-    "id": "3",
+    "id": "8",
     "description": "A log that has several uses.",
     "name": "A wooden log.",
     "value": "10"
   },
   {
-    "id": "4",
+    "id": "9",
     "description": "a small, dingy burlap sack.",
     "name": "a burlap sack",
     "hasContainer": true,

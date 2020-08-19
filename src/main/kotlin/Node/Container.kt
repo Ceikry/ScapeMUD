@@ -2,18 +2,45 @@ package Node
 
 import Node.Item.Item
 import org.json.simple.JSONArray
+import org.json.simple.JSONObject
 
 class Container(private val slots: Int) {
-    private val inventory = ArrayList<Item>()
+    private var inventory = ArrayList<Item>()
     var cachedItem: Item? = null
 
 
-    fun save(data: JSONArray){
-
+    fun save(root: JSONObject){
+        val it = JSONArray()
+        for(i in inventory){
+            val item = JSONObject()
+            item.put("id",i.id.toString())
+            item.put("amount",i.amount.toString())
+            if(i.container != null){
+                i.container!!.save(item)
+            }
+            it.add(item)
+        }
+        root.put("items",it)
     }
 
     fun parse(data: JSONArray){
+        for(i in data){
+            val it = i as JSONObject
+            val id = it["id"].toString().toInt()
+            val amt = it["amount"].toString().toInt()
+            val item = Item(id,amt)
 
+            if(item.definition?.hasContainer == true){
+                val its = it["items"] as JSONArray
+                for(e in its){
+                    val et = e as JSONObject
+                    val id2 = et["id"].toString().toInt()
+                    val amt2 = et["amount"].toString().toInt()
+                    item.container!!.addItem(Item(id2,amt2))
+                }
+            }
+            inventory.add(item)
+        }
     }
 
     fun addItem(item: Item): Boolean{

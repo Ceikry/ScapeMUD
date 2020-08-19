@@ -7,9 +7,9 @@ class InventoryAction : Action() {
         player.printInventory()
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: inventory")
-        GameConstants.addLine("Inventory lists out the contents of your inventory")
-        GameConstants.addLine("and how much space you have left.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: inventory")
+        player.addLine("Inventory lists out the contents of your inventory")
+        player.addLine("and how much space you have left.")
     }
 }

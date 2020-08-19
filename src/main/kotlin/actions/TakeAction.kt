@@ -8,7 +8,7 @@ import Node.Player
 class TakeAction : Action() {
     override fun handle(player: Player, tokens: Array<String>) {
         if(tokens.size < 2){
-            GameConstants.textQueue += System.lineSeparator() + "Take what?"
+            player.addLine("Take what?")
             return
         }
         if(tokens.size == 3){
@@ -17,7 +17,7 @@ class TakeAction : Action() {
             } else if(player.currentRoom!!.hasObject(tokens[2])) {
                 player.currentRoom!!.cachedObject
             } else null
-            containerNode ?: GameConstants.addLine("You don't see a ${tokens[2]} here.").also { return }
+            containerNode ?: player.addLine("You don't see a ${tokens[2]} here.").also { return }
             var nodeName = ""
             val container: Container? = if(containerNode is Item && containerNode.container != null){
                 containerNode.container.also { nodeName = containerNode.definition?.name!! }
@@ -25,28 +25,28 @@ class TakeAction : Action() {
                 containerNode.container.also { nodeName = containerNode.definition?.name!! }
             } else null
 
-            container ?: GameConstants.addLine("That can't store items.").also { return }
+            container ?: player.addLine("That can't store items.").also { return }
             if(container?.hasItem(tokens[1]) == true){
                 if(!container.withdrawItem(player.inventory,container.cachedItem!!)){
-                    GameConstants.addLine("You don't have space for that.")
+                    player.addLine("You don't have space for that.")
                 } else {
-                    GameConstants.addLine("You take ${container.cachedItem?.definition?.name} from $nodeName")
+                    player.addLine("You take ${container.cachedItem?.definition?.name} from $nodeName")
                 }
             }
             return
         }
         if(player.currentRoom?.hasItem(tokens[1]) == true){
             val item = player.currentRoom!!.getItem(tokens[1])
-            GameConstants.textQueue += System.lineSeparator() + "You take ${item.definition?.name} and place it in your bag."
+            player.addLine("You take ${item.definition?.name} and place it in your bag.")
             player.currentRoom!!.items.withdrawItem(player.inventory,item)
             return
         }
-        GameConstants.textQueue += System.lineSeparator() + "You see no such item."
+        player.addLine("You see no such item.")
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: take item_name or take item_name container_name")
-        GameConstants.addLine("Take allows you to take an item from the ground or from")
-        GameConstants.addLine("a container and place it in your inventory.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: take item_name or take item_name container_name")
+        player.addLine("Take allows you to take an item from the ground or from")
+        player.addLine("a container and place it in your inventory.")
     }
 }

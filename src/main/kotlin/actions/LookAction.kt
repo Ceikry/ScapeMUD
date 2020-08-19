@@ -22,19 +22,19 @@ class LookAction : Action() {
                     else -> -1
                 }
                 val room = RoomManager.getRoom(roomID)
-                room ?: GameConstants.addLine("You see nothing of interest there.")
-                room?.onEntry()
+                room ?: player.addLine("You see nothing of interest there.")
+                room?.onEntry(player)
             } else {
-                player.currentRoom?.look()
+                player.currentRoom?.look(player)
             }
         } else {
-            player.currentRoom?.look()
+            player.currentRoom?.look(player)
         }
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: look or look direction")
-        GameConstants.addLine("look by itself prints the details about the current room again.")
-        GameConstants.addLine("look direction prints the contents of the room in that direction.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: look or look direction")
+        player.addLine("look by itself prints the details about the current room again.")
+        player.addLine("look direction prints the contents of the room in that direction.")
     }
 }

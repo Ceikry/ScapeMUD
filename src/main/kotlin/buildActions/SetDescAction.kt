@@ -15,8 +15,8 @@ class SetDescAction : Action() {
         }
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: sd type your description here")
-        GameConstants.addLine("sd sets the description for a room.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: sd type your description here")
+        player.addLine("sd sets the description for a room.")
     }
 }

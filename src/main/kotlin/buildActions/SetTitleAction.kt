@@ -16,8 +16,8 @@ class SetTitleAction : Action() {
         }
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: st type the title of the room here.")
-        GameConstants.addLine("st sets the title for the current room.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: st type the title of the room here.")
+        player.addLine("st sets the title for the current room.")
     }
 }

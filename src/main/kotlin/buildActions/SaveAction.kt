@@ -9,8 +9,8 @@ class SaveAction : Action() {
         RoomManager.saveRooms("data")
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: save")
-        GameConstants.addLine("Saves all rooms to the rooms file.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: save")
+        player.addLine("Saves all rooms to the rooms file.")
     }
 }

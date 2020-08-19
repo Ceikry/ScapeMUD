@@ -13,7 +13,8 @@ enum class InputRepository(var command: String, action: Action) {
     HELP("help",HelpAction()),
     CHOP("chop",ChopAction()),
     PUT("put",PutAction()),
-    ATTACK("attack",AttackAction());
+    ATTACK("attack",AttackAction()),
+    QUIT("quit",QuitAction());
 
     var action: Action? = action
 

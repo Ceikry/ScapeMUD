@@ -27,7 +27,10 @@ class PulseRunner {
                     }
                 } else action.delay -= 1
             }
-            GameConstants.gui.refresh()
+
+            for(player in GameConstants.players.values){
+                player.refresh()
+            }
         }
     }
 }

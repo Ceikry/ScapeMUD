@@ -25,7 +25,7 @@ class CombatActionPulse(val player: Player,val npc: NPC) : ActionPulse(){
         var playerDEFSlot = 0
 
         if(player.hp <= 0){
-            GameConstants.addLine("Oh dead, you are dead!")
+            player.addLine("Oh dead, you are dead!")
             return true
         }
 
@@ -85,36 +85,36 @@ class CombatActionPulse(val player: Player,val npc: NPC) : ActionPulse(){
 
         if(playerAttackRoll > npcDefenceRoll){
             if(playerDamageRoll > 0)
-                GameConstants.addLine("You hit the ${npc.definition.name} for a $playerDamageRoll")
+                player.addLine("You hit the ${npc.definition.name} for a $playerDamageRoll")
             else
-                GameConstants.addLine("Your attack misses the ${npc.definition.name}")
+                player.addLine("Your attack misses the ${npc.definition.name}")
 
             npc.hp -= playerDamageRoll
         } else {
-            GameConstants.addLine("${npc.definition.name} blocked your attack.")
+            player.addLine("${npc.definition.name} blocked your attack.")
         }
 
         if(npcAttackRoll > playerDefenceRoll){
             if(npcDamageRoll > 0)
-                GameConstants.addLine("${npc.definition.name} hits you for a $npcDamageRoll")
+                player.addLine("${npc.definition.name} hits you for a $npcDamageRoll")
             else
-                GameConstants.addLine("${npc.definition.name}'s attack misses you.")
+                player.addLine("${npc.definition.name}'s attack misses you.")
             player.hp -= npcDamageRoll
         } else {
-             GameConstants.addLine("You block ${npc.definition.name}'s attack.")
+             player.addLine("You block ${npc.definition.name}'s attack.")
         }
 
-        GameConstants.addLine("Your HP: ${player.hp}/${player.maxHp} || ${npc.definition.name}: ${buildHpBar(npc.hp,npc.definition.hp)}")
+        player.addLine("Your HP: ${player.hp}/${player.maxHp} || ${npc.definition.name}: ${buildHpBar(npc.hp,npc.definition.hp)}")
         if(npc.hp <= 0){
             npc.alive = false
-            GameConstants.addLine(npc.definition?.name!! + " falls over, dead.")
+            player.addLine(npc.definition?.name!! + " falls over, dead.")
             npc.inventory.addItem(DropTables.rollFor(npc.id) ?: Item(0,1))
 
             val xpAddAmt = 4 * npc.definition.hp.toDouble()
             val skill = player.skills.forStyle(player.style)
 
             player.skills.addXP(skill, xpAddAmt)
-            GameConstants.addLine("For your victory, you gain $xpAddAmt ${skill.name} XP.")
+            player.addLine("For your victory, you gain $xpAddAmt ${skill.name} XP.")
 
             player.skills.forStyle(player.style)
             return true

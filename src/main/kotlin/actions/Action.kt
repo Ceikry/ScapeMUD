@@ -4,5 +4,5 @@ import Node.Player
 
 abstract class Action{
     abstract fun handle(player: Player, tokens: Array<String>)
-    abstract fun printHelp()
+    abstract fun printHelp(player: Player)
 }

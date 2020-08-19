@@ -59,6 +59,7 @@ class DefinitionParser {
             val hasContainer = item["hasContainer"]
             val containerSize = item["containerSize"]
             val stackable = item["stackable"]
+            val requirements = item["requirements"]
 
             val newItem = ItemDefinition()
             newItem.name = name
@@ -67,6 +68,14 @@ class DefinitionParser {
             newItem.hasContainer = (hasContainer ?: false) as Boolean
             newItem.containerSize = (containerSize ?: 0).toString().toInt()
             newItem.stackable = (stackable ?: false) as Boolean
+
+            if(requirements != null){
+                val mt = requirements.toString().split(":")
+                for(i in mt){
+                    val reqTokens = i.split(",")
+                    newItem.requirements.put(reqTokens[0].toInt(),reqTokens[1].toInt())
+                }
+            }
 
             if(item.containsKey("wieldable")){
                 newItem.wieldable = item["wieldable"] as Boolean

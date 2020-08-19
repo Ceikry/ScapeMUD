@@ -10,16 +10,16 @@ class AddAction : Action(){
 
     override fun handle(player: Player, tokens: Array<String>) {
         if(tokens.size < 2)
-            GameConstants.addLine("add where?").also { return }
+            player.addLine("add where?").also { return }
         val direction = tokens[1].toLowerCase()
         if(!validDirs.any{ it == direction }){
-            GameConstants.addLine("Not a valid direction.").also { return }
+            player.addLine("Not a valid direction.").also { return }
         }
 
         val r = Room()
 
         if(player.currentRoom == null && direction != "."){
-            GameConstants.addLine("You need to add the starting room first!").also { return }
+            player.addLine("You need to add the starting room first!").also { return }
         }
 
         RoomManager.rooms.put(r.id,r)
@@ -38,8 +38,8 @@ class AddAction : Action(){
         }
     }
 
-    override fun printHelp() {
-        GameConstants.addLine("Usage: add direction")
-        GameConstants.addLine("Adds an empty room in the given direction.")
+    override fun printHelp(player: Player) {
+        player.addLine("Usage: add direction")
+        player.addLine("Adds an empty room in the given direction.")
     }
 }
