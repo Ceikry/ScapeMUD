@@ -1,5 +1,5 @@
 # ScapeMUD
-A lazy runescape-inspired (Singleplayer) MUD
+A MUD written in Kotlin, inspired by RuneScape and SMAUG. I make this for fun.
 
 ## Features as of Aug 18, 2020
 * Room Builder
