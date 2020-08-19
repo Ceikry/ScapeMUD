@@ -27,4 +27,5 @@ A lazy runescape-inspired (Singleplayer) MUD
 * Ranged Combat
 * Chat
 * Discord Integration
+
 More to be planned soon, only like to plan out a few things at a time.
